@@ -25,8 +25,9 @@ function lpHost(origin) {
 	b -= cur << (bits-5);
 	bits -= 5
 
-	console.log('b='+b+', cur='+cur);
+	//console.log('b='+b+', cur='+cur);
 	s += encodeStd[cur];
+	console.log('  s='+s);
       }
     }
     if (bits > 0) {
@@ -35,6 +36,7 @@ function lpHost(origin) {
     }
   });
 
+  console.log('final s='+s);
   return s + ".litepages.googlezip.net";
 }
 

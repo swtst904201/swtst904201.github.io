@@ -16,7 +16,6 @@ function lpHost(origin) {
 
     var b = 0;
     var bits = 0;
-    var s = "";
     for (var i = 0; i < harr.length; i++) {
       b = (b << 8) + harr[i];
       bits += 8

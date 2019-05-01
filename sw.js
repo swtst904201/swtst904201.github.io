@@ -13,10 +13,10 @@ function lpHost(origin) {
       bits += 8
 
       while (bits >= 5) {
-	var cur = b >> (bits-5);
-	b -= cur << (bits-5);
-	bits -= 5
-	s += encodeStd[cur];
+        var cur = b >> (bits-5);
+        b -= cur << (bits-5);
+        bits -= 5
+        s += encodeStd[cur];
       }
     }
     if (bits > 0) {

@@ -48,10 +48,12 @@ function lpURL(origURL) {
   const url = new URL(origURL);
   const origin = "https://" + url.hostname + ":443";
   const newHost = lpHost(origin);
-  console.log('newHost=' + newHost);
-  const urlStr = "https://" + newHost + "/sr?u=" + encodeURI(origURL);
-  console.log('urlStr' + urlStr);
-  return new URL(urlStr);
+  return newHost.then(function(h) {
+    console.log('h=' + h);
+    const urlStr = "https://" + h + "/sr?u=" + encodeURI(origURL);
+    console.log('urlStr=' + urlStr);
+    return new URL(urlStr);
+  });
 }
 
 
@@ -61,6 +63,9 @@ self.addEventListener('fetch', event => {
   if (/^.*\.jpg$/.test(event.request.url)) {
     const url = new URL(event.request.url);
     console.log('matched: [https://' + url.hostname + ':443]')
-    event.respondWith(Response.redirect(lpURL("https://www.google.com/favicon.ico"), 307))
+    lpURL("https://www.google.com/favicon.ico").then(function(ru) {
+      console.log('ru=' + ru);
+      event.respondWith(Response.redirect(ru, 307));
+    });
   }
 });

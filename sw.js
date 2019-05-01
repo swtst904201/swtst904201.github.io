@@ -32,7 +32,7 @@ function lpURL(origURL) {
   const url = new URL(origURL);
   const origin = "https://" + url.hostname + ":443";
   return lpHost(origin).then(function(h) {
-    return newURL("https://" + h + "/sr?u=" + encodeURI(origURL));
+    return new URL("https://" + h + "/sr?u=" + encodeURI(origURL));
   });
 }
 

@@ -58,7 +58,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   console.log('fetch: ' + event);
   console.log('event.request.url: [' + event.request.url + ']');
-  console.log('event.request.destination: ' + event.request.destinaion);
+  console.log('event.request.destination: ' + event.request.destination);
   // if (/^.*\.jpg$/.test(event.request.url)) {
   if (lpAllowedHosts.includes(url.hostname) &&
       lpAllowedDestinations.includes(event.request.destination)) {

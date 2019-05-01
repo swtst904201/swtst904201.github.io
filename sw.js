@@ -24,10 +24,7 @@ function lpHost(origin) {
 	var cur = b >> (bits-5);
 	b -= cur << (bits-5);
 	bits -= 5
-
-	//console.log('b='+b+', cur='+cur);
 	s += encodeStd[cur];
-	console.log('  s='+s);
       }
     }
     if (bits > 0) {
@@ -36,32 +33,30 @@ function lpHost(origin) {
     }
   });
 
-  return Promise.all([hashPromise]).then(function() {
-    console.log('final s='+s);
-    var h = s + ".litepages.googlezip.net";
-    console.log('h=' + h);
-    return h;
+  return hashPromise.then(function() {
+    return s + ".litepages.googlezip.net";
   });
 }
 
 function lpURL(origURL) {
   const url = new URL(origURL);
   const origin = "https://" + url.hostname + ":443";
-  const newHost = lpHost(origin);
-  return newHost.then(function(h) {
-    console.log('h=' + h);
+  return lpHost(origin).then(function(h) {
     const urlStr = "https://" + h + "/sr?u=" + encodeURI(origURL);
     console.log('urlStr=' + urlStr);
     return new URL(urlStr);
   });
 }
 
-
+const lpAllowedHosts = [
+  'swtst904201.github.io',
+];
 self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
   console.log('fetch: ' + event)
   console.log('event.request.url: [' + event.request.url + ']')
-  if (/^.*\.jpg$/.test(event.request.url)) {
-    const url = new URL(event.request.url);
+  // if (/^.*\.jpg$/.test(event.request.url)) {
+  if (lpAllowedHosts.includes(url.hostname)) {
     console.log('matched: [https://' + url.hostname + ':443]')
     event.respondWith(lpURL("https://www.google.com/favicon.ico").then(function(ru) {
       console.log('ru=' + ru);

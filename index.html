@@ -4,9 +4,7 @@
   <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-            console.log('load event')
             navigator.serviceWorker.register('sw.js').then(reg => {
-                console.log('load reg: ' + reg)
             }, err => {
                 console.log('load err: ' + err)
             });

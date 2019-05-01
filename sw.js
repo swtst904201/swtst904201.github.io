@@ -58,7 +58,7 @@ self.addEventListener('fetch', event => {
   // if (/^.*\.jpg$/.test(event.request.url)) {
   if (lpAllowedHosts.includes(url.hostname)) {
     console.log('matched: [https://' + url.hostname + ':443]')
-    event.respondWith(lpURL("https://www.google.com/favicon.ico").then(function(ru) {
+    event.respondWith(lpURL(event.request.url).then(function(ru) {
       console.log('ru=' + ru);
       return Response.redirect(ru, 307);
     }));

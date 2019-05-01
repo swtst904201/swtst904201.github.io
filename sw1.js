@@ -49,6 +49,7 @@ function lpURL(origURL) {
 }
 
 const lpAllowedHosts = [
+  'www.google.com',
   'swtst904201.github.io',
 ];
 const lpAllowedDestinations = [

@@ -63,12 +63,12 @@ self.addEventListener('fetch', event => {
   if (lpAllowedHosts.includes(url.hostname) &&
       lpAllowedDestinations.includes(event.request.destination)) {
     console.log('matched: [https://' + url.hostname + ':443]')
-    // event.respondWith(lpURL(event.request.url).then(function(ru) {
-    //   console.log('ru=' + ru);
-    //   return Response.redirect(ru, 307);
-    // }));
-    lpURL(event.request.url).then(function(ru) {
-      console.log(event.request.url + ' => ' + ru)
-    });
+    event.respondWith(lpURL(event.request.url).then(function(ru) {
+      console.log('ru=' + ru);
+      return Response.redirect(ru, 307);
+    }));
+    // lpURL(event.request.url).then(function(ru) {
+    //   console.log(event.request.url + ' => ' + ru)
+    // });
   }
 });

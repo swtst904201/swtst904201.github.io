@@ -56,15 +56,19 @@ const lpAllowedDestinations = [
 ];
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
-  console.log('fetch: ' + event)
-  console.log('event.request.url: [' + event.request.url + ']')
+  console.log('fetch: ' + event);
+  console.log('event.request.url: [' + event.request.url + ']');
+  console.log('event.request.destination: ' + event.request.destinaion);
   // if (/^.*\.jpg$/.test(event.request.url)) {
   if (lpAllowedHosts.includes(url.hostname) &&
       lpAllowedDestinations.indlues(event.request.destination)) {
     console.log('matched: [https://' + url.hostname + ':443]')
-    event.respondWith(lpURL(event.request.url).then(function(ru) {
-      console.log('ru=' + ru);
-      return Response.redirect(ru, 307);
-    }));
+    // event.respondWith(lpURL(event.request.url).then(function(ru) {
+    //   console.log('ru=' + ru);
+    //   return Response.redirect(ru, 307);
+    // }));
+    lpURL(event.request.url).then(function(ru) {
+      console.log(event.request.url + ' => ' + ru)
+    });
   }
 });

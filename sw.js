@@ -39,7 +39,9 @@ function lpHost(origin) {
   Promise.all([hashPromise]).then(function() {
     console.log('final s='+s);
   });
-  return s + ".litepages.googlezip.net";
+  var h = s + ".litepages.googlezip.net";
+  console.log('h=' + h);
+  return h;
 }
 
 function lpURL(origURL) {

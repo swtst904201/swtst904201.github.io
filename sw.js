@@ -3,7 +3,6 @@ function lpHost(origin) {
   const mbuf = new TextEncoder('utf-8').encode(origin)
   return crypto.subtle.digest('SHA-256', mbuf).then(function(hbuf) {
     const harr = Array.from(new Uint8Array(hbuf));
-    const hhex = harr.map(b => ('00' + b.toString(16)).slice(-2)).join('');
 
     var s = ""
     var b = 0;

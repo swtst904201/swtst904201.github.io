@@ -36,12 +36,12 @@ function lpHost(origin) {
     }
   });
 
-  Promise.all([hashPromise]).then(function() {
+  return Promise.all([hashPromise]).then(function() {
     console.log('final s='+s);
+    var h = s + ".litepages.googlezip.net";
+    console.log('h=' + h);
+    return h;
   });
-  var h = s + ".litepages.googlezip.net";
-  console.log('h=' + h);
-  return h;
 }
 
 function lpURL(origURL) {

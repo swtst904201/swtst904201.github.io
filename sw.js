@@ -63,9 +63,9 @@ self.addEventListener('fetch', event => {
   if (/^.*\.jpg$/.test(event.request.url)) {
     const url = new URL(event.request.url);
     console.log('matched: [https://' + url.hostname + ':443]')
-    lpURL("https://www.google.com/favicon.ico").then(function(ru) {
+    event.respondWith(lpURL("https://www.google.com/favicon.ico").then(function(ru) {
       console.log('ru=' + ru);
-      event.respondWith(Response.redirect(ru, 307));
-    });
+      return Response.redirect(ru, 307);
+    }));
   }
 });

@@ -49,7 +49,9 @@ function lpURL(origURL) {
   const origin = "https://" + url.hostname + ":443";
   const newHost = lpHost(origin);
   console.log('newHost=' + newHost);
-  return new URL("https://" + newHost + "/sr?u=" + encodeURI(origURL));
+  const urlStr = "https://" + newHost + "/sr?u=" + encodeURI(origURL);
+  console.log('urlStr' + urlStr);
+  return new URL(urlStr);
 }
 
 

@@ -51,12 +51,16 @@ function lpURL(origURL) {
 const lpAllowedHosts = [
   'swtst904201.github.io',
 ];
+const lpAllowedDestinations = [
+  'image',
+];
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   console.log('fetch: ' + event)
   console.log('event.request.url: [' + event.request.url + ']')
   // if (/^.*\.jpg$/.test(event.request.url)) {
-  if (lpAllowedHosts.includes(url.hostname)) {
+  if (lpAllowedHosts.includes(url.hostname) &&
+      lpAllowedDestinations.indlues(event.request.destination)) {
     console.log('matched: [https://' + url.hostname + ':443]')
     event.respondWith(lpURL(event.request.url).then(function(ru) {
       console.log('ru=' + ru);

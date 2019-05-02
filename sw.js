@@ -58,6 +58,7 @@ function lpHandle(event) {
 
 self.addEventListener('fetch', event => {
   if (lpHandle(event)) {
+    console.log('AS: handled ' + event.request.url)
     return;
   }
 });

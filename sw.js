@@ -42,13 +42,22 @@ const lpAllowedHosts = [
 const lpAllowedDestinations = [
   'image',
 ];
-self.addEventListener('fetch', event => {
+
+function lpHandle(event) {
   const url = new URL(event.request.url);
   if (lpAllowedHosts.includes(url.hostname) &&
       lpAllowedDestinations.includes(event.request.destination)) {
     event.respondWith(lpURL(event.request.url).then(function(ru) {
-      console.log('redirect [' + event.request.url + '] => [' + ru + ']');
+      console.log('lpHandle: [' + event.request.url + '] => [' + ru + ']');
       return Response.redirect(ru, 307);
     }));
+    return true;
+  }
+  return false;
+}
+
+self.addEventListener('fetch', event => {
+  if (lpHandle(event)) {
+    return;
   }
 });
